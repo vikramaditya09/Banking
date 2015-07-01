@@ -4,71 +4,118 @@
  * and open the template in the editor.
  */
 package banking;
-
+import java.util.Scanner;
 /**
  *
  * @author vikramaditya.tanwar
  */
 public abstract class Accounts {
-    int bal;
-    String name;
-    String address;
-    String city;
-    
-   abstract void checkin();
+    int balance;
+    int type;
+    int deposit;
+    int withdraw;
+       
+    abstract void setbalance(int x);
+    abstract int getbalance();
+    abstract void deposit();
+    abstract void withdraw();    
+
    
-   abstract void savings();
+}
+
+class Checkin extends Accounts {
+    Scanner in = new Scanner(System.in); 
+    Checkin()
+    {
+        getbalance();
+    }
+    @Override
+    public int getbalance() {
+        return balance;
+    }
+
+    @Override
+    void setbalance(int bal) {
+      this.balance = bal;
     
-   abstract void business();
-  
-   abstract void sort();
+    }
+     @Override
+     void deposit()
+     {   
+         int b=this.getbalance();
+         setbalance(in.nextInt()+this.getbalance());
+         System.out.println("successfully deposited");
+         
+     }
+     @Override
+     void withdraw()
+     {   int c=this.getbalance();
+         setbalance(c-in.nextInt());
+     }
+}
+class Savings extends Accounts {
+    Scanner in = new Scanner(System.in); 
+    private int bal;
+    Savings(){
+         
+    getbalance();
+    }
+
+    @Override
+    public int getbalance() {
+      return balance;  
+    }
+
+    @Override
+    void setbalance(int bal) {
+       this.bal = bal; 
+    }
+      @Override
+     void deposit()
+     {   
+         int b=this.getbalance();
+         setbalance(in.nextInt()+this.getbalance());
+         
+     }
+     @Override
+     void withdraw()
+     {   int c=this.getbalance();
+         setbalance(c-in.nextInt());
+     }
+
+ 
     
 }
 
-class A extends Accounts
-{
-
-    @Override
-    void checkin() {
-       System.out.println("enter the customer name" +name);
-       
-       System.out.println("enter the customer address" +address);
-       
-       System.out.println("enter the customer city" +city);
-       
-       bal=100;
-       
-       System.out.println("inital deposit amount" +bal);
+class Business extends Accounts {
+    Scanner in = new Scanner(System.in); 
+    private int bal;
+    Business(){
+       getbalance(); 
     }
-
-    @Override
-    void savings() {
-         System.out.println("enter the customer name" +name);
-       
-       System.out.println("enter the customer address" +address);
-       
-       System.out.println("enter the customer city" +city);
-       
-       bal=100;
-       
-       System.out.println("inital deposit amount" +bal);
+            
+   @Override
+    public void setbalance(int bal) {
+        this.bal = bal;
     }
-
+    
+    
     @Override
-    void business() {
-         System.out.println("enter the customer name" +name);
-       
-       System.out.println("enter the customer address" +address);
-       
-       System.out.println("enter the customer city" +city);
-       
-       bal=100;
-       
-       System.out.println("inital deposit amount" +bal);
+    public int getbalance() {
+        return balance;
     }
-
-    @Override
-    void sort() {
-       
-    }
+     @Override
+     void deposit()
+     {   
+         int b=this.getbalance();
+         setbalance(in.nextInt()+this.getbalance());
+         
+     }
+     @Override
+     void withdraw()
+     {   int c=this.getbalance();
+         setbalance(c-in.nextInt());
+     }
+    
+    
 }
