@@ -25,6 +25,14 @@ abstract class Transaction {
             Scanner in=new Scanner(System.in);
             int id=0;
             System.out.println("Press '0' if Do not want to change");
+            System.out.println("Change Transaction ID");
+            id=in.nextInt();
+            if(id!=0)
+                setTransactionId(id);
+            System.out.println("Change Transaction Amount");
+            id=in.nextInt();
+            if(id!=0)
+                setTransactionAmount(id);
             System.out.println("Change Customer ID");
             id=in.nextInt();
             if(id!=0)
@@ -33,15 +41,12 @@ abstract class Transaction {
             id=in.nextInt();
             if(id!=0)
                 setAccountId(id);
-            System.out.println("Change Transaction Amount");
-            id=in.nextInt();
-            if(id!=0)
-                setTransactionAmount(id);
+            
             System.out.println("Change Transaction type \n>>>>>>>: 1->Debit    2->Credit :<<<<<<");
             id=in.nextInt();
             if(id!=0)
-                setCustomerId(id);
-            System.out.println("Change Date dd-mm-yyyy");
+                setType(id);
+            System.out.println("Press '1' to Change Date then enter date in dd-mm-yyyy Format");
             id=in.nextInt();
             if(id!=0){
                 Date newdate=null;
@@ -64,6 +69,7 @@ abstract class Transaction {
         }
     }
     abstract public void setTransaction(int TransactionId,int CustomerId,int AccountId,int TransactionAmount);
+    abstract public void displayTransaction();
             
 
     public void setAccountId(int AccountId) {
@@ -89,6 +95,31 @@ abstract class Transaction {
     public void setType(int type) {
         this.type = type;
     }
+
+    public int getAccountId() {
+        return AccountId;
+    }
+
+    public int getCustomerId() {
+        return CustomerId;
+    }
+
+    public Date getDt() {
+        return Dt;
+    }
+
+    public int getTransactionAmount() {
+        return TransactionAmount;
+    }
+
+    public int getTransactionId() {
+        return TransactionId;
+    }
+
+    public int getType() {
+        return type;
+    }
+    
 }
 class CreditTransaction extends Transaction{
     
@@ -103,6 +134,14 @@ class CreditTransaction extends Transaction{
         super.setTransactionId(TransactionId);
         super.setTransactionAmount(TransactionAmount);
         super.setDt(new Date());        
+    }
+    @Override
+    public void displayTransaction(){
+        System.out.println("Transaction ID:"+this.getTransactionId());
+        System.out.println("Transaction Amount"+this.getTransactionAmount()+" Credited");
+        System.out.println("Customer ID:"+this.getCustomerId());
+        System.out.println("In Account Number:"+this.getAccountId());
+        System.out.println("On Date:"+this.getDt().toString());
     }
     
 }
@@ -119,6 +158,14 @@ class DebitTransaction extends Transaction{
         super.setTransactionId(TransactionId);
         super.setTransactionAmount(TransactionAmount);
         super.setDt(new Date());        
+    }
+    @Override
+    public void displayTransaction(){
+        System.out.println("Transaction ID:"+this.getTransactionId());
+        System.out.println("Transaction Amount"+this.getTransactionAmount()+" Credited");
+        System.out.println("Customer ID:"+this.getCustomerId());
+        System.out.println("In Account Number:"+this.getAccountId());
+        System.out.println("On Date:"+this.getDt().toString());
     }
     
 }
