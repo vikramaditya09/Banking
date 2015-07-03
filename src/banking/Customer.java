@@ -5,24 +5,44 @@
  */
 package banking;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author vikramaditya.tanwar
  */
 public class Customer {
-    String name;
-    String address;
-    int AccountId;
     int CustomerId;
+    String CustomerName;
+    String Address;
+    List<Integer> AccountId;
+    List<Integer> TransactionId;
     
     Customer(){
+        AccountId=new LinkedList<>();
+        TransactionId=new LinkedList<>();
     
     }
-    Customer(String n,String a,int z,int y){
+    Customer(String name,int id,String address,int accountId){
+        AccountId=new LinkedList<>();
+        TransactionId=new LinkedList<>();
+        CustomerName=name;
+        Address=address;
+        CustomerId=id;
+        AccountId.add(accountId);    
+    }
+    void addAccount(int AccountNumber){
+        AccountId.add(AccountNumber);
+        
+    }
+    void addTransaction(int Transaction){
+        TransactionId.add(Transaction);
     
-     name=n;
-     address=a;
-     AccountId=z;
-     CustomerId=y;
-}
+    }
+
+    public List<Integer> getAccountId() {
+        return AccountId;
+    }
+   
 }
