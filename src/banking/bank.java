@@ -64,7 +64,7 @@ public class bank {
         }
     }
     void displayAccounts(){   
-        System.out.println("\nAccount List <account numbers>");
+        //System.out.println("\nAccount List <account numbers>");
         accounts.values().stream().forEach((acc) -> {
             acc.dispaly();
             //System.out.println("Account number: "+acc.AccountID);
@@ -124,36 +124,53 @@ public class bank {
         Scanner in=new Scanner(System.in);
         int amount;
         int choice=in.nextInt();
+        boolean flag=true;
         switch(choice){
             case 1: System.out.println("Enter the Amount to be search");
                     amount=in.nextInt();
                     for(Accounts a:accounts.values()){
-                            if(a.balance==amount)
+                            if(a.balance==amount){
                                 a.dispaly();
+                                flag=false;
+                            }   
                     }
+                    if(flag)
+                        System.out.println("No Data Found");
                     break;
             case 2: System.out.println("Enter the Amount to be search for equal and more");
                     amount=in.nextInt();
                     for(Accounts a:accounts.values()){
-                            if(a.balance>=amount)
+                            if(a.balance>=amount){
                                 a.dispaly();
+                                flag=false;
+                            }
                     }
+                    if(flag)
+                        System.out.println("No Data Found");
                     break;
             case 3: System.out.println("Enter the Amount to be search for equal and less");
                     amount=in.nextInt();
                     for(Accounts a:accounts.values()){
-                            if(a.balance<=amount)
+                            if(a.balance<=amount){
                                 a.dispaly();
+                                flag=false;
+                            }
                     }
+                    if(flag)
+                        System.out.println("No Data Found");
                     break;
             case 4: System.out.println("Enter the Amount range\nMinimum:");
                     amount=in.nextInt();
                     System.out.println("Maximum:");
                     int max=in.nextInt();
                     for(Accounts a:accounts.values()){
-                            if(a.balance>=amount&&a.balance<=max)
+                            if(a.balance>=amount&&a.balance<=max){
                                 a.dispaly();
+                                flag=false;
+                            }
                     }
+                    if(flag)
+                        System.out.println("No Data Found");
                     break;
             default:System.out.println("Worn Input");
         }
@@ -167,7 +184,7 @@ public class bank {
             System.out.println("Choose Type of Transaction\n1.Credit\n2.Debit");
             int choice=in.nextInt();
             if(choice==1){
-                System.out.println("Enter Customer Number");
+                System.out.println("Enter Customer ID: ");
                 int Cid=in.nextInt();
                 Customer c=customers.get(Cid);
                 if(c==null) 
@@ -287,7 +304,7 @@ public class bank {
         
     }
     void editTransaction(){
-        System.out.println("Enter the transaction Id to be delete");
+        System.out.println("Enter the transaction Id to be Edit");
         Scanner in=new Scanner(System.in);
         int tid=in.nextInt();
         for(Transaction t:transactions.values()){

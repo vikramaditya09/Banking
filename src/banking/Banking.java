@@ -21,38 +21,27 @@ public class Banking {
        bank b1=new bank();
        
         String s="y";
-        System.out.println("Welcome To Main Menu.");
-       
-       while(s.equals("y"))
-       {
-         
+        System.out.println("****************************************\n"
+                + "************Welcome To My Bank**********\n"
+                + "****************************************");  
           ban.MainMenu(b1);
-          System.out.println("Welcome To Main Menu Again. Press y to continue ");
-          s=ban.in.next();
-          
-          
-          
-       }
-      
-       
-       
-       
     }
     void MainMenu(bank b){
        
        int choice=0;       
        String c="y";  
        
-       
+       while(true)
             try{
                     
-                    System.out.println("\nMain Menu\n1.Account Management\n2.Transaction Management");
+                    System.out.println("\nMain Menu\n1.Account Management\n2.Transaction Management\n3.Exit");
                     choice=in.nextInt();
                     
-                    System.out.println("Choice:"+choice);
+                    
                     switch(choice){
                         case 1:accountmanagement(b);break;
                         case 2:transactionmanagement(b);break;
+                        case 3:return;
                         default:System.out.println("bad choice");
                     }
                     
@@ -101,7 +90,7 @@ public class Banking {
                 + "1.Add transaction\n"
                 + "2.Delete Transaction\n"
                 + "3.Edit Transaction\n"
-                + "4.Get Transaction By Date\n"
+                + "4.Get Transaction of a Account By Date\n"
                 + "5.Sort Transaction by Amount\n"
                 + "6.Sort Transaction by Date\n"
                 + "7.Sort Transaction by Type\n");
