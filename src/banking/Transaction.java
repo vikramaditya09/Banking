@@ -11,15 +11,16 @@ package banking;
  */
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Scanner;
-abstract class Transaction {
+abstract class Transaction implements Comparable<Transaction>{
     private int TransactionId;
     private Date Dt;
     private int CustomerId;
     private int AccountId;
     private int type;
-    private int TransactionAmount;
+    int TransactionAmount;
     void editTransaction(){
         try{        
             Scanner in=new Scanner(System.in);
@@ -68,9 +69,7 @@ abstract class Transaction {
             System.out.println("Error While Editing Trasaction");            
         }
     }
-    abstract public void setTransaction(int TransactionId,int CustomerId,int AccountId,int TransactionAmount);
-    abstract public void displayTransaction();
-            
+    abstract public void displayTransaction();            
 
     public void setAccountId(int AccountId) {
         this.AccountId = AccountId;
@@ -119,53 +118,79 @@ abstract class Transaction {
     public int getType() {
         return type;
     }
+    public static Comparator<Transaction > AmountComparator = new Comparator<Transaction >() {   
+
+        @Override
+        public int compare(Transaction o1, Transaction o2) {
+            return o1.TransactionAmount-o2.TransactionAmount;            
+        } 
+    };
+    public static Comparator<Transaction > TypeComparator = new Comparator<Transaction >() {   
+
+        @Override
+        public int compare(Transaction o1, Transaction o2) {
+            return o1.type-o2.type;            
+        } 
+    };
+    public static Comparator<Transaction > DateComparator = new Comparator<Transaction >() {   
+
+        @Override
+        public int compare(Transaction o1, Transaction o2) {
+            return o1.Dt.compareTo(o2.Dt);            
+        } 
+    };
     
 }
 class CreditTransaction extends Transaction{
     
-    CreditTransaction(){
+    CreditTransaction(int TransactionId,int CustomerId,int AccountId,int TransactionAmount){
         super.setType(1);
-        
-    }       
-    @Override
-    public void setTransaction(int TransactionId,int CustomerId,int AccountId,int TransactionAmount){
         super.setAccountId(AccountId);
         super.setCustomerId(CustomerId);
         super.setTransactionId(TransactionId);
         super.setTransactionAmount(TransactionAmount);
-        super.setDt(new Date());        
-    }
+        super.setDt(new Date());  
+        
+    }       
+    
     @Override
     public void displayTransaction(){
-        System.out.println("Transaction ID:"+this.getTransactionId());
-        System.out.println("Transaction Amount"+this.getTransactionAmount()+" Credited");
+        System.out.println("\nTransaction ID:"+this.getTransactionId());
+        System.out.println("Transaction Amount "+this.getTransactionAmount()+" Credited");
         System.out.println("Customer ID:"+this.getCustomerId());
         System.out.println("In Account Number:"+this.getAccountId());
         System.out.println("On Date:"+this.getDt().toString());
+    }
+    
+
+    @Override
+    public int compareTo(Transaction o) {
+        return this.TransactionAmount-o.TransactionAmount; //To change body of generated methods, choose Tools | Templates.
     }
     
 }
 class DebitTransaction extends Transaction{
     
-    DebitTransaction(){
+    DebitTransaction(int TransactionId,int CustomerId,int AccountId,int TransactionAmount){
         super.setType(2);
-        
-    }       
-    @Override
-    public void setTransaction(int TransactionId,int CustomerId,int AccountId,int TransactionAmount){
         super.setAccountId(AccountId);
         super.setCustomerId(CustomerId);
         super.setTransactionId(TransactionId);
         super.setTransactionAmount(TransactionAmount);
-        super.setDt(new Date());        
-    }
+        super.setDt(new Date());    
+        
+    }       
     @Override
     public void displayTransaction(){
-        System.out.println("Transaction ID:"+this.getTransactionId());
-        System.out.println("Transaction Amount"+this.getTransactionAmount()+" Credited");
+        System.out.println("\nTransaction ID:"+this.getTransactionId());
+        System.out.println("Transaction Amount "+this.getTransactionAmount()+" Debited");
         System.out.println("Customer ID:"+this.getCustomerId());
         System.out.println("In Account Number:"+this.getAccountId());
         System.out.println("On Date:"+this.getDt().toString());
+    }
+    @Override
+    public int compareTo(Transaction o) {
+        return this.TransactionAmount-o.TransactionAmount;  //To change body of generated methods, choose Tools | Templates.
     }
     
 }
